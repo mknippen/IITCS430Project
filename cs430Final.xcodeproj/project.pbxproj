@@ -19,6 +19,9 @@
 		FA9FDAC116581B1F004B3FE1 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA9FDABF16581B1F004B3FE1 /* MainStoryboard_iPhone.storyboard */; };
 		FA9FDAC416581B1F004B3FE1 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA9FDAC216581B1F004B3FE1 /* MainStoryboard_iPad.storyboard */; };
 		FA9FDAC716581B1F004B3FE1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FDAC616581B1F004B3FE1 /* ViewController.m */; };
+		FA9FDB3C165C89FB004B3FE1 /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA9FDB3B165C89FB004B3FE1 /* data.plist */; };
+		FA9FDB41165C8E32004B3FE1 /* Target.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FDB40165C8E32004B3FE1 /* Target.m */; };
+		FA9FDB44165C8E40004B3FE1 /* Sensor.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FDB43165C8E40004B3FE1 /* Sensor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +42,11 @@
 		FA9FDAC316581B1F004B3FE1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		FA9FDAC516581B1F004B3FE1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		FA9FDAC616581B1F004B3FE1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FA9FDB3B165C89FB004B3FE1 /* data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = data.plist; sourceTree = "<group>"; };
+		FA9FDB3F165C8E32004B3FE1 /* Target.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Target.h; sourceTree = "<group>"; };
+		FA9FDB40165C8E32004B3FE1 /* Target.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Target.m; sourceTree = "<group>"; };
+		FA9FDB42165C8E40004B3FE1 /* Sensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sensor.h; sourceTree = "<group>"; };
+		FA9FDB43165C8E40004B3FE1 /* Sensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sensor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,12 +93,14 @@
 		FA9FDAAD16581B1F004B3FE1 /* cs430Final */ = {
 			isa = PBXGroup;
 			children = (
+				FA9FDB3E165C8E21004B3FE1 /* Model */,
 				FA9FDAB616581B1F004B3FE1 /* AppDelegate.h */,
 				FA9FDAB716581B1F004B3FE1 /* AppDelegate.m */,
 				FA9FDABF16581B1F004B3FE1 /* MainStoryboard_iPhone.storyboard */,
 				FA9FDAC216581B1F004B3FE1 /* MainStoryboard_iPad.storyboard */,
 				FA9FDAC516581B1F004B3FE1 /* ViewController.h */,
 				FA9FDAC616581B1F004B3FE1 /* ViewController.m */,
+				FA9FDB3B165C89FB004B3FE1 /* data.plist */,
 				FA9FDAAE16581B1F004B3FE1 /* Supporting Files */,
 			);
 			path = cs430Final;
@@ -108,6 +118,17 @@
 				FA9FDABD16581B1F004B3FE1 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FA9FDB3E165C8E21004B3FE1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA9FDB3F165C8E32004B3FE1 /* Target.h */,
+				FA9FDB40165C8E32004B3FE1 /* Target.m */,
+				FA9FDB42165C8E40004B3FE1 /* Sensor.h */,
+				FA9FDB43165C8E40004B3FE1 /* Sensor.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +188,7 @@
 				FA9FDABE16581B1F004B3FE1 /* Default-568h@2x.png in Resources */,
 				FA9FDAC116581B1F004B3FE1 /* MainStoryboard_iPhone.storyboard in Resources */,
 				FA9FDAC416581B1F004B3FE1 /* MainStoryboard_iPad.storyboard in Resources */,
+				FA9FDB3C165C89FB004B3FE1 /* data.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +202,8 @@
 				FA9FDAB416581B1F004B3FE1 /* main.m in Sources */,
 				FA9FDAB816581B1F004B3FE1 /* AppDelegate.m in Sources */,
 				FA9FDAC716581B1F004B3FE1 /* ViewController.m in Sources */,
+				FA9FDB41165C8E32004B3FE1 /* Target.m in Sources */,
+				FA9FDB44165C8E40004B3FE1 /* Sensor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +330,7 @@
 				FA9FDACC16581B1F004B3FE1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

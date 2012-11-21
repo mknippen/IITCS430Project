@@ -17,13 +17,37 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    [self loadDataFile];
+    
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)loadDataFile {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"];
+    NSDictionary *dataDict = [[NSDictionary alloc] initWithContentsOfFile:path];
+    
+    //get the bounds
+    NSArray *bounds = dataDict[@"bounds"];
+    int upperBound;
+    if (bounds.count == 2) {
+        NSNumber *bound1 = bounds[0];
+        NSNumber *bound2 = bounds[1];
+        if (bound1.intValue > bound2.intValue) {
+            upperBound = bound1.intValue;
+        } else {
+            upperBound = bound2.intValue;
+        }
+    } else {
+        NSLog(@"Error: There should be TWO bounds");
+    }
+    
+    //get the targets, then separate them into lower and upper targets
+    //NSArray *targets = dataDict[@"bounds"];
+    
+    
+
 }
+
+
+
 
 @end
