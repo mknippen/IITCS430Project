@@ -6,19 +6,19 @@
 	<array>
 		<dict>
 			<key>name</key>
-			<string>t1</string>
-			<key>x</key>
-			<real>0.1</real>
-			<key>y</key>
-			<real>0.3</real>
-		</dict>
-		<dict>
-			<key>name</key>
 			<string>t2</string>
 			<key>x</key>
 			<real>0.5</real>
 			<key>y</key>
 			<real>0.2</real>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>t1</string>
+			<key>x</key>
+			<real>0.1</real>
+			<key>y</key>
+			<real>0.3</real>
 		</dict>
 		<dict>
 			<key>name</key>

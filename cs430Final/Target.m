@@ -10,4 +10,14 @@
 
 @implementation Target
 
+- (CGPoint)point {
+    return CGPointMake(self.x, self.y);
+}
+
+- (void)setWithDictionary:(NSDictionary *)dict {
+    self.x = [dict[@"x"] floatValue];
+    self.y = [dict[@"y"] floatValue];
+    self.name = dict[@"name"];
+}
+
 @end

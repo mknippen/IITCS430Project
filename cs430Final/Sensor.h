@@ -10,12 +10,13 @@
 
 @interface Sensor : NSObject
 
-@property (nonatomic, assign) int x;
-@property (nonatomic, assign) int y;
-@property (nonatomic, assign) int weight;
+@property (nonatomic, assign) float x;
+@property (nonatomic, assign) float y;
+@property (nonatomic, assign) float weight;
 @property (nonatomic, assign) BOOL isUpper;
 @property (nonatomic, strong) NSString *name;
 
 - (CGPoint)point;
+- (void)setWithDictionary:(NSDictionary *)dict;
 
 @end
