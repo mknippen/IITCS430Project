@@ -87,7 +87,21 @@
 }
 
 - (void)addInfinitySensors {
+    //place them off into INFINITY so by default they are not in range. We do this because we are automatically adding them, and we do not want to have a duplicate
     
+    self.upperInfinity = [[Sensor alloc] init];
+    self.upperInfinity.x = -INFINITY; //either INFINITY or -INFINITY would work here
+    self.upperInfinity.y = INFINITY;
+    self.upperInfinity.weight = 0;
+    self.upperInfinity.isUpper = YES;
+    [self.upperSensors addObject:self.upperInfinity];
+    
+    self.lowerInfinity = [[Sensor alloc] init];
+    self.lowerInfinity.x = -INFINITY;
+    self.lowerInfinity.y = -INFINITY;
+    self.lowerInfinity.weight = 0;
+    self.lowerInfinity.isUpper = NO;
+    [self.upperSensors addObject:self.lowerInfinity];
 }
 
 - (void)createMemory {

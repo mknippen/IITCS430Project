@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class Sensor;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -16,5 +18,9 @@
 @property (nonatomic, strong) NSMutableArray *upperSensors;
 @property (nonatomic, strong) NSMutableArray *lowerSensors;
 @property (nonatomic, strong) NSMutableArray *memory;
+
+@property (nonatomic, strong) Sensor *upperInfinity;
+@property (nonatomic, strong) Sensor *lowerInfinity;
+
 
 @end

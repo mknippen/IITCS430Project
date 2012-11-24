@@ -77,7 +77,6 @@
     } else {
         return YES;
     }
-    
 }
 
 //retuns either the higher or lower number based on the upper BOOL
