@@ -7,6 +7,8 @@
 //
 
 #import "Target.h"
+#import "Sensor.h"
+#import "AppDelegate.h"
 
 @implementation Target
 
@@ -18,6 +20,44 @@
     self.x = [dict[@"x"] floatValue];
     self.y = [dict[@"y"] floatValue];
     self.name = dict[@"name"];
+}
+
+- (NSArray *)upperSensorsInRange {
+    AppDelegate *ad = [UIApplication sharedApplication].delegate;
+    NSMutableArray *sensorsInRange = [[NSMutableArray alloc] initWithCapacity:ad.upperSensors.count];
+    for (Sensor *s in ad.upperSensors) {
+        if ([self isSensorInRange:s]) {
+            [sensorsInRange addObject:s];
+        }
+    }
+    return sensorsInRange;
+}
+
+- (NSArray *)lowerSensorsInRange {
+    AppDelegate *ad = [UIApplication sharedApplication].delegate;
+    NSMutableArray *sensorsInRange = [[NSMutableArray alloc] initWithCapacity:ad.lowerSensors.count];
+    for (Sensor *s in ad.lowerSensors) {
+        if ([self isSensorInRange:s]) {
+            [sensorsInRange addObject:s];
+        }
+    }
+    return sensorsInRange;
+}
+
+- (float)distanceBetweenPoints:(CGPoint)point1 second:(CGPoint)point2 {
+    float dx = point2.x - point1.x;
+    float dy = point2.y - point1.y;
+    return sqrt(dx*dx + dy*dy);
+};
+
+- (BOOL)isSensorInRange:(Sensor *)sensor {
+    float distance = [self distanceBetweenPoints:self.point second:sensor.point];
+    
+    if (distance <= 1) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 @end

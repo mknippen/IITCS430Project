@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class Target;
+
 @interface Sensor : NSObject
 
 @property (nonatomic, assign) float x;
@@ -18,5 +20,7 @@
 
 - (CGPoint)point;
 - (void)setWithDictionary:(NSDictionary *)dict;
+
+- (BOOL)dominatesSensor:(Sensor *)sensor atTarget:(Target *)target;
 
 @end

@@ -21,7 +21,7 @@
     [super viewDidLoad];
     [self loadDataFile];
     [self createMemory];
-    
+    [self runAlgorithm];
 }
 
 - (void)loadDataFile {
@@ -88,8 +88,47 @@
 
 - (void)createMemory {
     int targetCount = self.targets.count;
+    int upperCount = self.upperSensors.count;
+    int lowerCount = self.lowerSensors.count;
+    
     self.memory = [[NSMutableArray alloc] initWithCapacity:targetCount];
+    for (int i=0; i<targetCount; i++) {
+        //3D array, make the upper Sensors now
+        NSMutableArray *aUpperArray = [[NSMutableArray alloc] initWithCapacity:upperCount];
+        for (int i=0; i<upperCount; i++) {
+            //now the lower sensors
+            NSMutableArray *aLowerArray = [[NSMutableArray alloc] initWithCapacity:lowerCount];
+            for (int i=0; i<lowerCount; i++) {
+                //now the lower sensors
+                //fill the arrays with NULLs
+                [aLowerArray addObject:[NSNull null]];
+            }
+            [aUpperArray addObject:aLowerArray];
+        }
+        [self.memory addObject:aUpperArray];
+    }
 }
 
+- (void)setWeight:(float)weight forT:(int)targetNum upper:(int)upper lower:(int)lower {
+    self.memory[targetNum][upper][lower] = @(weight);
+}
+
+- (float)weightForT:(int)targetNum upper:(int)upper lower:(int)lower {
+    return [self.memory[targetNum][upper][lower] floatValue];
+}
+
+- (void)runAlgorithm {
+    int i = 0;
+    
+    for (Target *t in self.targets) {
+        if (i == 0) {
+            //first target
+        } else {
+            //iterative target
+        }
+        
+        i++;
+    }
+}
 
 @end

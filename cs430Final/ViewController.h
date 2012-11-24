@@ -10,9 +10,6 @@
 
 @interface ViewController : UIViewController
 
-@property (nonatomic, strong) NSMutableArray *targets;
-@property (nonatomic, strong) NSMutableArray *upperSensors;
-@property (nonatomic, strong) NSMutableArray *lowerSensors;
-@property (nonatomic, strong) NSMutableArray *memory;
+
 
 @end

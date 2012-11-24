@@ -7,40 +7,135 @@
 //
 
 #import "AppDelegate.h"
+#import "Target.h"
+#import "Sensor.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [self loadDataFile];
+    [self createMemory];
+    [self runAlgorithm];
     return YES;
 }
-							
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+
+- (void)loadDataFile {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"];
+    NSDictionary *dataDict = [[NSDictionary alloc] initWithContentsOfFile:path];
+    
+    //get the bounds
+    NSArray *bounds = dataDict[@"bounds"];
+    float upperBound;
+    if (bounds.count == 2) {
+        NSNumber *bound1 = bounds[0];
+        NSNumber *bound2 = bounds[1];
+        if (bound1.floatValue > bound2.floatValue) {
+            upperBound = bound1.floatValue;
+        } else {
+            upperBound = bound2.floatValue;
+        }
+    } else {
+        NSLog(@"Error: There should be TWO bounds");
+    }
+    
+    //get the targets, than sort them by X
+    NSArray *targetDicts = dataDict[@"targets"];
+    self.targets = [[NSMutableArray alloc] initWithCapacity:targetDicts.count];
+    for (NSDictionary *dict in targetDicts) {
+        Target *t = [[Target alloc] init];
+        [t setWithDictionary:dict];
+        [self.targets addObject:t];
+    }
+    [self sortTargets];
+    
+    //get the sensors, then separate them into lower and upper targets
+    NSArray *sensorDicts = dataDict[@"sensors"];
+    self.upperSensors = [[NSMutableArray alloc] initWithCapacity:(targetDicts.count/2)]; //capacities for NSMutableArrays are estimates
+    self.lowerSensors = [[NSMutableArray alloc] initWithCapacity:(targetDicts.count/2)];
+    
+    for (NSDictionary *dict in sensorDicts) {
+        Sensor *s = [[Sensor alloc] init];
+        [s setWithDictionary:dict];
+        if (s.y < upperBound) {
+            s.isUpper = NO;
+            [self.lowerSensors addObject:s];
+        } else {
+            s.isUpper = YES;
+            [self.upperSensors addObject:s];
+        }
+    }
+    
+    //add the infinity sensors
+    [self addInfinitySensors];
+    
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+- (void)sortTargets {
+    [self.targets sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        Target *t1 = (Target *)obj1;
+        Target *t2 = (Target *)obj2;
+        
+        if (t1.x == t2.x) {
+            return NSOrderedSame;
+        } else if (t1.x < t2.x) {
+            return NSOrderedAscending;
+        } else {
+            return NSOrderedDescending;
+        }
+    }];
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+- (void)addInfinitySensors {
+    
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+- (void)createMemory {
+    int targetCount = self.targets.count;
+    int upperCount = self.upperSensors.count;
+    int lowerCount = self.lowerSensors.count;
+    
+    self.memory = [[NSMutableArray alloc] initWithCapacity:targetCount];
+    for (int i=0; i<targetCount; i++) {
+        //3D array, make the upper Sensors now
+        NSMutableArray *aUpperArray = [[NSMutableArray alloc] initWithCapacity:upperCount];
+        for (int i=0; i<upperCount; i++) {
+            //now the lower sensors
+            NSMutableArray *aLowerArray = [[NSMutableArray alloc] initWithCapacity:lowerCount];
+            for (int i=0; i<lowerCount; i++) {
+                //now the lower sensors
+                //fill the arrays with NULLs
+                [aLowerArray addObject:[NSNull null]];
+            }
+            [aUpperArray addObject:aLowerArray];
+        }
+        [self.memory addObject:aUpperArray];
+    }
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+- (void)setWeight:(float)weight forT:(int)targetNum upper:(int)upper lower:(int)lower {
+    self.memory[targetNum][upper][lower] = @(weight);
 }
+
+- (float)weightForT:(int)targetNum upper:(int)upper lower:(int)lower {
+    return [self.memory[targetNum][upper][lower] floatValue];
+}
+
+- (void)runAlgorithm {
+    int i = 0;
+    
+    for (Target *t in self.targets) {
+        if (i == 0) {
+            //first target
+        } else {
+            //iterative target
+        }
+        
+        i++;
+    }
+}
+
+
+
 
 @end
