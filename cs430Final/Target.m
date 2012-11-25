@@ -31,8 +31,6 @@
         }
     }
     
-    [sensorsInRange addObject:ad.upperInfinity];
-    
     return sensorsInRange;
 }
 
@@ -45,8 +43,6 @@
         }
     }
     
-    [sensorsInRange addObject:ad.lowerInfinity];
-
     return sensorsInRange;
 }
 

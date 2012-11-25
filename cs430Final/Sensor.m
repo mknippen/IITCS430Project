@@ -70,13 +70,12 @@
         }
     }
 
-    //third case: they are tied, return the one less further along the x axis
-    if (s.x - self.x > 0) {
+    //third case: they are tied, return the one on the left (less further along the x axis)
+    if (self.x - s.x > 0) {
         return NO;
     } else {
         return YES;
     }
-
 }
 
 //retuns either the higher or lower number based on the upper BOOL

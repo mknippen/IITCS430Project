@@ -152,6 +152,8 @@
         NSArray *upperSensors = self.upperSensors; //[t upperSensorsInRange];
         NSArray *lowerSensors = self.lowerSensors; //[t lowerSensorsInRange];
         
+        NSLog(@"Sensors in range of %@: U:%@ \n L: %@",t.name, [t upperSensorsInRange], [t lowerSensorsInRange]);
+        
         //find the weight with every combination of upper/lower targets
         for (Sensor *upper in upperSensors) {
             NSMutableArray *upperMemory = targetMemory[upper.index];
