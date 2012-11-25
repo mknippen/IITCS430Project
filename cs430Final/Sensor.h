@@ -17,6 +17,7 @@
 @property (nonatomic, assign) float weight;
 @property (nonatomic, assign) BOOL isUpper;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, assign) int index;
 
 - (CGPoint)point;
 - (void)setWithDictionary:(NSDictionary *)dict;

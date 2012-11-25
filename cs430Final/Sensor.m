@@ -44,14 +44,13 @@
     //first get the equation of the circles and line
     //our goal is to get a,b,c for the quad eqn
     //a = 1 for all
-    //b = 2(x1)
-    //c = (x1)^2+(t.y-y1)^2 - 1
-    //(x-x1)+(y-y1)=1 y=target.y
-    //x^2-x1-(2x1)
-    float b1 = self.x * 2;
-    float c1 = (self.x*self.x)+((t.y-self.y)*(t.y-self.y))-1;
-    float b2 = s.x * 2;
-    float c2 = (s.x*s.x)+((t.y-s.y)*(t.y-s.y))-1;
+    //b = 2(y1)
+    //c = (y1)^2+(t.x-x1)^2 - 1
+    //(x-x1)+(y-y1)=1 x=target.x
+    float b1 = self.y * 2;
+    float c1 = (self.y*self.y)+((t.x-self.x)*(t.x-self.x))-1;
+    float b2 = s.y * 2;
+    float c2 = (s.y*s.y)+((t.x-s.x)*(t.x-s.x))-1;
     int currentLowHighPoint = [self quadraticEqnForA:1 b:b1 c:c1 upper:!self.isUpper];
     int sensorLowHighPoint = [self quadraticEqnForA:1 b:b2 c:c2 upper:!self.isUpper];
     
@@ -77,6 +76,7 @@
     } else {
         return YES;
     }
+
 }
 
 //retuns either the higher or lower number based on the upper BOOL

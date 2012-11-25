@@ -59,9 +59,11 @@
         [s setWithDictionary:dict];
         if (s.y < upperBound) {
             s.isUpper = NO;
+            s.index = self.lowerSensors.count;
             [self.lowerSensors addObject:s];
         } else {
             s.isUpper = YES;
+            s.index = self.upperSensors.count;
             [self.upperSensors addObject:s];
         }
     }
@@ -101,7 +103,7 @@
     self.lowerInfinity.y = -INFINITY;
     self.lowerInfinity.weight = 0;
     self.lowerInfinity.isUpper = NO;
-    [self.upperSensors addObject:self.lowerInfinity];
+    [self.lowerSensors addObject:self.lowerInfinity];
 }
 
 - (void)createMemory {
@@ -136,16 +138,61 @@
 }
 
 - (void)runAlgorithm {
-    int i = 0;
     
     for (Target *t in self.targets) {
-        if (i == 0) {
-            //first target
-        } else {
-            //iterative target
-        }
+        int targetIndex = [self.targets indexOfObject:t];
         
-        i++;
+        NSMutableArray *targetMemory = self.memory[targetIndex];
+        NSArray *upperSensors = [t upperSensorsInRange];
+        NSArray *lowerSensors = [t lowerSensorsInRange];
+        
+        //find the weight with every combination of upper/lower targets
+        for (Sensor *upper in upperSensors) {
+            NSMutableArray *upperMemory = targetMemory[upper.index];
+            
+            for (Sensor *lower in lowerSensors) {
+                if (upper == self.upperInfinity && lower == self.lowerInfinity) {
+                    break;
+                }
+                
+                float weight = upper.weight+lower.weight;
+                
+                if (targetIndex != 0) { //skip for the first target
+                    //get the memory of the previous target
+                    int lowestPossibleWeight = INFINITY;
+                    NSArray *prevTargetMemory = self.memory[targetIndex-1];
+                    for (NSArray *prevUpperMemory in prevTargetMemory) {
+                        int prevUpperIndex = 0;
+                        for (NSNumber *prevLowerMemory in prevUpperMemory) {
+                            int prevLowerIndex = 0;
+                            if (![prevLowerMemory isEqual:[NSNull null]]) {
+                                int weightToTestAgainst = prevLowerMemory.floatValue;
+                                
+                                if (prevUpperIndex != upper.index) {
+                                    weightToTestAgainst += upper.weight;
+                                }
+                                
+                                if (prevLowerIndex != lower.index) {
+                                    weightToTestAgainst += lower.weight;
+                                }
+                                
+                                if (weightToTestAgainst < lowestPossibleWeight) {
+                                    lowestPossibleWeight = weightToTestAgainst;
+                                }
+                            }
+                            prevLowerIndex++;
+                        }
+                        prevUpperIndex++;
+                    }
+                    
+                    weight = lowestPossibleWeight;
+                }
+                
+                NSLog(@"Target: %@, Upper:%@, Lower:%@ weight %.2f", t.name, upper.name, lower.name, weight);
+                upperMemory[lower.index] = @(weight);
+            }
+            
+        }
     }
 }
 
