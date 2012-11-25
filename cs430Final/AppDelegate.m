@@ -95,14 +95,18 @@
     self.upperInfinity.x = -INFINITY; //either INFINITY or -INFINITY would work here
     self.upperInfinity.y = INFINITY;
     self.upperInfinity.weight = 0;
+    self.upperInfinity.name = @"inf";
     self.upperInfinity.isUpper = YES;
+    self.upperInfinity.index = self.upperSensors.count;
     [self.upperSensors addObject:self.upperInfinity];
     
     self.lowerInfinity = [[Sensor alloc] init];
     self.lowerInfinity.x = -INFINITY;
     self.lowerInfinity.y = -INFINITY;
     self.lowerInfinity.weight = 0;
+    self.lowerInfinity.name = @"-inf";
     self.lowerInfinity.isUpper = NO;
+    self.lowerInfinity.index = self.lowerSensors.count;
     [self.lowerSensors addObject:self.lowerInfinity];
 }
 
@@ -141,10 +145,12 @@
     
     for (Target *t in self.targets) {
         int targetIndex = [self.targets indexOfObject:t];
+        BOOL sensorInRange = YES;
         
         NSMutableArray *targetMemory = self.memory[targetIndex];
-        NSArray *upperSensors = [t upperSensorsInRange];
-        NSArray *lowerSensors = [t lowerSensorsInRange];
+        
+        NSArray *upperSensors = self.upperSensors; //[t upperSensorsInRange];
+        NSArray *lowerSensors = self.lowerSensors; //[t lowerSensorsInRange];
         
         //find the weight with every combination of upper/lower targets
         for (Sensor *upper in upperSensors) {
@@ -161,10 +167,10 @@
                     //get the memory of the previous target
                     int lowestPossibleWeight = INFINITY;
                     NSArray *prevTargetMemory = self.memory[targetIndex-1];
+                    int prevUpperIndex = 0;
                     for (NSArray *prevUpperMemory in prevTargetMemory) {
-                        int prevUpperIndex = 0;
+                        int prevLowerIndex = 0;
                         for (NSNumber *prevLowerMemory in prevUpperMemory) {
-                            int prevLowerIndex = 0;
                             if (![prevLowerMemory isEqual:[NSNull null]]) {
                                 int weightToTestAgainst = prevLowerMemory.floatValue;
                                 
@@ -186,10 +192,31 @@
                     }
                     
                     weight = lowestPossibleWeight;
+                } else {
+                    //make sure at least one of the sensors covers the target
+                    sensorInRange = NO;
+                    
+                    if (upper == self.upperInfinity) {
+                        if ([t isSensorInRange:lower]) {
+                            sensorInRange = YES;
+                        }
+                    } else if (lower == self.lowerInfinity) {
+                        if ([t isSensorInRange:upper]) {
+                            sensorInRange = YES;
+                        }
+                    } else {
+                        //neither are infinity, just make sure one is in range
+                        if ([t isSensorInRange:upper] || [t isSensorInRange:lower]) {
+                            //at least one is in range, we're all good.
+                            sensorInRange = YES;
+                        }
+                    }
                 }
                 
-                NSLog(@"Target: %@, Upper:%@, Lower:%@ weight %.2f", t.name, upper.name, lower.name, weight);
-                upperMemory[lower.index] = @(weight);
+                if (sensorInRange) {
+                    NSLog(@"Target: %@, Upper:%@, Lower:%@ weight %.2f", t.name, upper.name, lower.name, weight);
+                    upperMemory[lower.index] = @(weight);
+                }
             }
             
         }

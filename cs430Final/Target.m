@@ -57,8 +57,13 @@
 };
 
 - (BOOL)isSensorInRange:(Sensor *)sensor {
-    float distance = [self distanceBetweenPoints:self.point second:sensor.point];
+    AppDelegate *ad = [UIApplication sharedApplication].delegate;
+    //infinitys are always in range
+    if (sensor == ad.upperInfinity || sensor == ad.lowerInfinity) {
+        return YES;
+    }
     
+    float distance = [self distanceBetweenPoints:self.point second:sensor.point];
     if (distance <= 1) {
         return YES;
     } else {
