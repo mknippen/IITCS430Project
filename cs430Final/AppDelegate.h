@@ -22,5 +22,7 @@
 @property (nonatomic, strong) Sensor *upperInfinity;
 @property (nonatomic, strong) Sensor *lowerInfinity;
 
+@property (nonatomic, assign) float minCost;
+@property (nonatomic, strong) NSSet *finalSolution;
 
 @end

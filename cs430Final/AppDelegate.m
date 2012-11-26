@@ -204,6 +204,8 @@
     NSMutableSet *finalSet = [NSMutableSet setWithSet:finalAnswerSpot.solution];
     [finalSet removeObject:self.upperInfinity];
     [finalSet removeObject:self.lowerInfinity];
+    self.finalSolution = finalSet;
+    self.minCost = minCost;
     NSLog(@"the minimum cost is: %.2f", minCost);
     NSLog(@"The final solution of Sensors is: %@", finalSet);
 }
