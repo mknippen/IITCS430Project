@@ -10,6 +10,7 @@
 
 @interface ViewController : UIViewController
 
+//the labels shown on the screen
 @property (weak, nonatomic) IBOutlet UILabel *numTargetsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numUpSensorsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numLowSensorsLabel;

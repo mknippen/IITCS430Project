@@ -12,16 +12,19 @@
 
 @implementation Target
 
+//convience method to turn the x,y properties to a CGPoint
 - (CGPoint)point {
     return CGPointMake(self.x, self.y);
 }
 
+//given an NSDictionary, fill in the target with all the proper information
 - (void)setWithDictionary:(NSDictionary *)dict {
     self.x = [dict[@"x"] floatValue];
     self.y = [dict[@"y"] floatValue];
     self.name = dict[@"name"];
 }
 
+//returns all of the upper sensors in range to cover the target
 - (NSArray *)upperSensorsInRange {
     AppDelegate *ad = [UIApplication sharedApplication].delegate;
     NSMutableArray *sensorsInRange = [[NSMutableArray alloc] initWithCapacity:ad.upperSensors.count];
@@ -34,6 +37,7 @@
     return sensorsInRange;
 }
 
+//returns all of the lower sensors in range to cover the target
 - (NSArray *)lowerSensorsInRange {
     AppDelegate *ad = [UIApplication sharedApplication].delegate;
     NSMutableArray *sensorsInRange = [[NSMutableArray alloc] initWithCapacity:ad.lowerSensors.count];
@@ -46,12 +50,14 @@
     return sensorsInRange;
 }
 
+//uses the distance formula to determine the distance between two points
 - (float)distanceBetweenPoints:(CGPoint)point1 second:(CGPoint)point2 {
     float dx = point2.x - point1.x;
     float dy = point2.y - point1.y;
     return sqrt(dx*dx + dy*dy);
 };
 
+//given a sensor, determines if the sensor is in range to cover the target
 - (BOOL)isSensorInRange:(Sensor *)sensor {
     AppDelegate *ad = [UIApplication sharedApplication].delegate;
     //infinitys are always in range
@@ -67,6 +73,7 @@
     }
 }
 
+//describes the object in debugging
 - (NSString *)description {
     return self.name;
 }

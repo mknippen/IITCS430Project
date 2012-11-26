@@ -22,6 +22,8 @@
     return YES;
 }
 
+
+//loads the data file in from the data.plist and puts each sensor into the proper array. Sorts all targets by the x axis
 - (void)loadDataFile {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"];
     NSDictionary *dataDict = [[NSDictionary alloc] initWithContentsOfFile:path];
@@ -56,6 +58,7 @@
     self.upperSensors = [[NSMutableArray alloc] initWithCapacity:(targetDicts.count/2)]; //capacities for NSMutableArrays are estimates
     self.lowerSensors = [[NSMutableArray alloc] initWithCapacity:(targetDicts.count/2)];
     
+    //convert the NSDictionary objects into actual objects
     for (NSDictionary *dict in sensorDicts) {
         Sensor *s = [[Sensor alloc] init];
         [s setWithDictionary:dict];
@@ -70,11 +73,12 @@
         }
     }
     
-    //add the infinity sensors
+    //add the infinity sensors to the upper and lower sensor array
     [self addInfinitySensors];
     
 }
 
+//sorts all targets by the increasing x axis
 - (void)sortTargets {
     [self.targets sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         Target *t1 = (Target *)obj1;
@@ -112,6 +116,7 @@
     [self.lowerSensors addObject:self.lowerInfinity];
 }
 
+//creates a 3-dimensional array sorted by targets, than upper sensors, than lower senors. It holds a MemorySpot object, which holds the weight and the sensors used to achieve such weight
 - (void)createMemory {
     int targetCount = self.targets.count;
     int upperCount = self.upperSensors.count;
@@ -143,6 +148,7 @@
     }
 }
 
+//goes through every option for the first target. This "base case" fills in every location in the 3D memory array, so when the OPT method is called later, it will already have these values to fill in.
 - (void)runBaseCase {
     Target *t = self.targets[0];
     int targetIndex = 0;
@@ -161,9 +167,6 @@
         
         for (Sensor *lower in lowerSensors) {
             if (upper == self.upperInfinity && lower == self.lowerInfinity) {
-                MemorySpot *m = [[MemorySpot alloc] init];
-                m.weight = INFINITY;
-                upperMemory[lower.index] = m;
                 break;
             }
             
@@ -185,6 +188,7 @@
     }
 }
 
+//Looks through every possiblity of the last target. It then returns the one with the smallest cost.
 - (void)runAlgorithm {
     float minCost = INFINITY;
     MemorySpot *finalAnswerSpot = nil;
@@ -200,32 +204,36 @@
         }
     }
     
-    //just in case, remove the inf and -inf sensors if they are still in the solution for some reason
+    //just in case, remove the inf and -inf sensors if they are still in the solution
     NSMutableSet *finalSet = [NSMutableSet setWithSet:finalAnswerSpot.solution];
     [finalSet removeObject:self.upperInfinity];
     [finalSet removeObject:self.lowerInfinity];
-    self.finalSolution = finalSet;
-    self.minCost = minCost;
+
     NSLog(@"the minimum cost is: %.2f", minCost);
     NSLog(@"The final solution of Sensors is: %@", finalSet);
+    
+    //store these in properties, so we can display on the screen later
+    self.finalSolution = finalSet;
+    self.minCost = minCost;
 }
 
+//the main recursive call for the entire app. Given a target, upperSensor, and lowerSensor it will return the lowest weight and the sensors that cover it, providing that the upperSensor and lowerSensor are the dominating sensors.
+//for more information, see the report
 - (MemorySpot *)OptForTarget:(Target *)t upper:(Sensor *)upper lower:(Sensor *)lower {
     //first check if the answer is already stored
-    MemorySpot *mem = [self numberForT:t upper:upper lower:lower];
+    MemorySpot *mem = [self spotForT:t upper:upper lower:lower];
     if (mem) {
         return mem;
     }
     
     //we currently do not have this stored, so lets go find it
-    
     //get the previous target
     Target *prevTarget = [self targetBeforeTarget:t];
     float minCost = INFINITY;
     MemorySpot *minMemorySpot = nil; //the location to the previous spot in memory
-    for (Sensor *anUpper in self.upperSensors) { //or should it be [prevTarget upperSensorsInRange]
+    for (Sensor *anUpper in self.upperSensors) {
         if ([upper dominatesSensor:anUpper atTarget:t]) {
-            for (Sensor *aLower in self.lowerSensors) { //or should it be [prevTarget lowerSensorsInRange]
+            for (Sensor *aLower in self.lowerSensors) {
                 if ([lower dominatesSensor:aLower atTarget:t] && !(anUpper == self.upperInfinity && aLower == self.lowerInfinity)) {
                     //check to make sure at least one of these covers the sensor, not including infinity
                     if ([self doSensorsUpper:upper lower:lower coverTarget:t]) {
@@ -265,6 +273,11 @@
     
 }
 
+
+
+#pragma mark - Helper Methods
+
+//looks at the two sensors and target, and makes sure that at least one of them (not counting the infinity sensors) cover the sensor
 - (BOOL)doSensorsUpper:(Sensor *)upper lower:(Sensor *)lower coverTarget:(Target *)t {
     BOOL sensorInRange = NO;
     
@@ -287,50 +300,14 @@
     return sensorInRange;
 }
 
-//if (targetIndex != 0) { //skip for the first target
-//    //get the memory of the previous target
-//    int lowestPossibleWeight = INFINITY;
-//    NSArray *prevTargetMemory = self.memory[targetIndex-1];
-//    int prevUpperIndex = 0;
-//    for (NSArray *prevUpperMemory in prevTargetMemory) {
-//        int prevLowerIndex = 0;
-//        for (NSNumber *prevLowerMemory in prevUpperMemory) {
-//            if (![prevLowerMemory isEqual:[NSNull null]]) {
-//                int weightToTestAgainst = prevLowerMemory.floatValue;
-//                
-//                if (prevUpperIndex != upper.index) {
-//                    weightToTestAgainst += upper.weight;
-//                }
-//                
-//                if (prevLowerIndex != lower.index) {
-//                    weightToTestAgainst += lower.weight;
-//                }
-//                
-//                if (weightToTestAgainst < lowestPossibleWeight) {
-//                    lowestPossibleWeight = weightToTestAgainst;
-//                }
-//            }
-//            prevLowerIndex++;
-//        }
-//        prevUpperIndex++;
-//    }
-//    
-//    weight = lowestPossibleWeight;
-//} else {
-
-#pragma mark - Helper Methods
-
+//sets the MemorySpot in the correct location in memory
 - (void)setSpot:(MemorySpot *)mem forT:(Target *)t upper:(Sensor *)upper lower:(Sensor *)lower {
     int targetNum = [self.targets indexOfObject:t];
     self.memory[targetNum][upper.index][lower.index] = mem;
 }
 
-- (float)weightForT:(int)targetNum upper:(int)upper lower:(int)lower {
-    MemorySpot *m= self.memory[targetNum][upper][lower];
-    return m.weight;
-}
-
-- (MemorySpot *)numberForT:(Target *)t upper:(Sensor *)upper lower:(Sensor *)lower {
+//retuns the MemorySpot given a target, upper and lower sensor
+- (MemorySpot *)spotForT:(Target *)t upper:(Sensor *)upper lower:(Sensor *)lower {
     int tIndex = [self.targets indexOfObject:t];
     if (tIndex != NSNotFound) {
         MemorySpot *num = self.memory[tIndex][upper.index][lower.index];
@@ -341,6 +318,7 @@
     return nil;
 }
 
+//returns the target directly before t along the x axis. 
 - (Target *)targetBeforeTarget:(Target *)t {
     int index = [self.targets indexOfObject:t];
     

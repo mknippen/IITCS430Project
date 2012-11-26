@@ -19,9 +19,14 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) int index;
 
+//convience method to turn the x,y properties to a CGPoint
 - (CGPoint)point;
+
+//given an NSDictionary, fill in the sensor with all the proper information
 - (void)setWithDictionary:(NSDictionary *)dict;
 
+//determines if the current target dominates another target.
+//for more information, see the report
 - (BOOL)dominatesSensor:(Sensor *)sensor atTarget:(Target *)target;
 
 @end

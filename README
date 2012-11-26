@@ -1,1 +1,5 @@
 IIT CS 430 Fall Semester 2012 Final Project
+
+Build Instructions:
+To Build you will need a Macintosh Computer and Xcode (free software made by Apple).
+Simply click the .xcodeproj file and hit "Build and Run" in the top left corner.
