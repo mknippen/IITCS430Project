@@ -22,6 +22,7 @@
 		FA9FDB3C165C89FB004B3FE1 /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA9FDB3B165C89FB004B3FE1 /* data.plist */; };
 		FA9FDB41165C8E32004B3FE1 /* Target.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FDB40165C8E32004B3FE1 /* Target.m */; };
 		FA9FDB44165C8E40004B3FE1 /* Sensor.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FDB43165C8E40004B3FE1 /* Sensor.m */; };
+		FAFD50E91664062D00B48833 /* MemorySpot.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD50E81664062D00B48833 /* MemorySpot.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		FA9FDB40165C8E32004B3FE1 /* Target.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Target.m; sourceTree = "<group>"; };
 		FA9FDB42165C8E40004B3FE1 /* Sensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sensor.h; sourceTree = "<group>"; };
 		FA9FDB43165C8E40004B3FE1 /* Sensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sensor.m; sourceTree = "<group>"; };
+		FAFD50E71664062D00B48833 /* MemorySpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemorySpot.h; sourceTree = "<group>"; };
+		FAFD50E81664062D00B48833 /* MemorySpot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemorySpot.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +128,8 @@
 			children = (
 				FA9FDB3F165C8E32004B3FE1 /* Target.h */,
 				FA9FDB40165C8E32004B3FE1 /* Target.m */,
+				FAFD50E71664062D00B48833 /* MemorySpot.h */,
+				FAFD50E81664062D00B48833 /* MemorySpot.m */,
 				FA9FDB42165C8E40004B3FE1 /* Sensor.h */,
 				FA9FDB43165C8E40004B3FE1 /* Sensor.m */,
 			);
@@ -204,6 +209,7 @@
 				FA9FDAC716581B1F004B3FE1 /* ViewController.m in Sources */,
 				FA9FDB41165C8E32004B3FE1 /* Target.m in Sources */,
 				FA9FDB44165C8E40004B3FE1 /* Sensor.m in Sources */,
+				FAFD50E91664062D00B48833 /* MemorySpot.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

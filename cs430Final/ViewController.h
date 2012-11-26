@@ -10,6 +10,11 @@
 
 @interface ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *numTargetsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numUpSensorsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numLowSensorsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *minCostLabel;
+@property (weak, nonatomic) IBOutlet UITextView *sensorListTextView;
 
 
 @end

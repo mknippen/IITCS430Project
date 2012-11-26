@@ -1,23 +1,113 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2519" systemVersion="12A206j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1856"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--View Controller-->
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="568" height="300"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Number of Targets: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmX-NJ-vbN">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="209" id="sJr-QI-O5b"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Number of Upper Sensors: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCB-wU-9vV">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="257" id="mXj-ka-5mj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Number of Lower Sensors: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puA-wW-3X8">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="274" id="crm-Lb-H1n"/>
+                                    <constraint firstAttribute="height" constant="21" id="qQo-BU-Ot2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Minimum Cost: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dhf-uC-Oyb">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="312" id="xDg-bm-4dL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sensors Used:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFP-de-9X6">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="CST-3f-JEp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="s1, s2" translatesAutoresizingMaskIntoConstraints="NO" id="tRr-hK-0gX">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="326" id="384-p9-0fN"/>
+                                    <constraint firstAttribute="height" constant="128" id="irA-LM-oJt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="puA-wW-3X8" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="15Z-0U-c75"/>
+                            <constraint firstItem="Dhf-uC-Oyb" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="98" id="1fF-BJ-3v1"/>
+                            <constraint firstItem="dFP-de-9X6" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="101" id="EHW-ZG-Kph"/>
+                            <constraint firstItem="Dhf-uC-Oyb" firstAttribute="top" secondItem="puA-wW-3X8" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="MdE-Ub-1e7"/>
+                            <constraint firstItem="dCB-wU-9vV" firstAttribute="top" secondItem="tmX-NJ-vbN" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="a10-Fp-ukO"/>
+                            <constraint firstItem="dCB-wU-9vV" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="7" id="bsF-ue-6KX"/>
+                            <constraint firstItem="tRr-hK-0gX" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="227" id="byz-cB-CY4"/>
+                            <constraint firstItem="puA-wW-3X8" firstAttribute="top" secondItem="dCB-wU-9vV" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="fPR-PG-Mwi"/>
+                            <constraint firstItem="tmX-NJ-vbN" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="61" id="neq-QH-Pit"/>
+                            <constraint firstItem="tRr-hK-0gX" firstAttribute="top" secondItem="Dhf-uC-Oyb" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="qmU-Wv-Df2"/>
+                            <constraint firstAttribute="bottom" secondItem="dFP-de-9X6" secondAttribute="bottom" constant="124" id="rNy-bB-C92"/>
+                            <constraint firstItem="tmX-NJ-vbN" firstAttribute="top" secondItem="3" secondAttribute="top" constant="40" id="viS-Dn-2Zx"/>
+                        </constraints>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="minCostLabel" destination="Dhf-uC-Oyb" id="5Ch-Vg-2aI"/>
+                        <outlet property="numLowSensorsLabel" destination="puA-wW-3X8" id="sEZ-et-yZV"/>
+                        <outlet property="numTargetsLabel" destination="tmX-NJ-vbN" id="lbY-MG-WSv"/>
+                        <outlet property="numUpSensorsLabel" destination="dCB-wU-9vV" id="YZq-D8-2ya"/>
+                        <outlet property="sensorListTextView" destination="tRr-hK-0gX" id="Ivl-bC-vcz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="minCostLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="numLowSensorsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="numTargetsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="numUpSensorsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="sensorListTextView" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
