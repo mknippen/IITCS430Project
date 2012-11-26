@@ -67,4 +67,8 @@
     }
 }
 
+- (NSString *)description {
+    return self.name;
+}
+
 @end
